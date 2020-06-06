@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="src/assets/images/warcraftlogo.jpeg" width="80" height="80">
+    <img src="src/assets/images/warcraftlogo.png" width="80" height="80">
     <h3 align="center">Trade Chat - Warcraft</h3>
     <p>Real-time Chat Client, branded in the wacraft universe</p>
     .
