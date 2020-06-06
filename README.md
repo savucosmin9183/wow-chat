@@ -20,7 +20,7 @@ npm run dev
 
 
 ### Patch 1.0
-### Savoux - Shaman Prograncement - Level 23
+### Savoux - Shaman's Prograncement - Level 23
 
 ## Quests
 
