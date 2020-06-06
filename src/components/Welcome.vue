@@ -57,7 +57,7 @@ html{
 .welcome{
   height: 100vh;
   width: 100vw;
-  background-image: url('../assets/images/test2.jpg');
+  background-image: url('../assets/images/main_background.jpg');
   background-size: cover; /* or contain depending on what you want */
   background-position: center center;
   background-repeat: no-repeat;

@@ -3,8 +3,7 @@
     :class="{
       'alliance_div': alliance == true,
       'horde_div': alliance == false }">
-    <Audio-player v-if="alliance" key="allaince" :sources="[swsong]" :loop="true" :autoplay="true"></Audio-player>
-    <Audio-player v-else  key="horde" :sources="[orgsong]" :loop="true" :autoplay="true"></Audio-player>
+    <Audio-player key="allaince" :sources="music" :loop="true" :autoplay="true"></Audio-player>
     <form @submit.prevent :class="{'alliance_form': alliance == true,
                                     'horde_form': alliance == false}">
       <label class="form_label" for="name">Enter your name:</label>
@@ -46,7 +45,8 @@ export default {
       avatar: null,
       feedback: null,
       swsong,
-      orgsong
+      orgsong,
+      music : null
     }
   },
   props: ['alliance'],
@@ -92,6 +92,8 @@ export default {
       .catch(err => {
         console.log(err);
       })
+
+    this.music = this.alliance ? [this.swsong] : [this.orgsong];
     
   }
 }
