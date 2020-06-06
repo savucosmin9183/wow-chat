@@ -78,8 +78,7 @@ export default {
     }
   },
   created(){
-    if(this.alliance){
-      db.collection('alliance_leaders').get()
+      db.collection(this.alliance ? 'alliance_leaders' : 'horde_leaders').get()
       .then(snapshot => {
         snapshot.forEach(doc => {
           let image = {};
@@ -93,22 +92,7 @@ export default {
       .catch(err => {
         console.log(err);
       })
-    }else{
-      db.collection('horde_leaders').get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          let image = {};
-          let img = doc.data();
-          image.src = img.image;
-          image.alt = img.name;
-          image.id = doc.id;
-          this.images.push(image);
-        })
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    }
+    
   }
 }
 </script>
