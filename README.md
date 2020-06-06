@@ -3,7 +3,9 @@
 </p>
 <h3 align="center">Trade Chat - Warcraft</h3>
 <p align="center">
-    Real-time Chat Client, branded in the wacraft universe · ⚒️ Vue.js, Firebase
+    Real-time Chat Client, branded in the wacraft universe 
+    <br />
+    ⚒️ Vue.js, Firebase
     <br />
     <a href="https://wow-chat-88f4c.web.app/">View Demo</a>
 </p>
