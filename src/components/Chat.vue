@@ -6,14 +6,15 @@
                 <ul class="msgs">
                     <li v-for="message in messages" :key="message.id">
                         <img class="chat_avatar" :src="message.image">
-                        <span class="name_blue">{{message.name}}: </span>
+                        <span :class="{'name_blue': message.alliance == true,
+                                        'name_red': message.alliance == false}">{{message.name}}: </span>
                         <span class="message">{{message.content}}</span>
                         <span class="timestamp">{{message.timestamp}}</span>
                     </li>     
                 </ul>
             </div>
-            <input class="form_input" type="text" name="msg" v-model="new_msg">
-            <button @click="send_message" class="btn send_button">Send Message</button>    
+            <input class="form_input" @keydown.enter="send_message" type="text" name="msg" v-model="new_msg">
+            <button @click="send_message"  class="btn send_button">Send Message</button>    
         </div>
     </div>
 </template>
@@ -38,12 +39,14 @@ export default {
     },
     methods:{
         send_message(){
+            console.log('triggered');
             if(this.new_msg){
                 db.collection('messages').add({
                     content: this.new_msg,
                     name: this.name,
                     image: this.avatar.src,
-                    timestamp: Date.now()
+                    timestamp: Date.now(),
+                    alliance: this.alliance
                 }).catch(err => {
                     console.log(err);
                 })
@@ -66,6 +69,7 @@ export default {
                         content: doc.data().content,
                         timestamp: moment(doc.data().timestamp).format('lll'),
                         image: doc.data().image,
+                        alliance: doc.data().alliance
                     })
                 }
             })
@@ -88,7 +92,11 @@ export default {
 
 }
 .name_blue{
-    color: #66ff00;
+    color: blue;
+}
+
+.name_red{
+    color: red;
 }
 
 .chat_block{
