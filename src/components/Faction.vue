@@ -1,10 +1,16 @@
 <template>
-  <div class="faction_div horde_div">
-    <Audio-player :sources="audioSources" :loop="true" :autoplay="true"></Audio-player>
-    <form @submit.prevent class="horde_form">
+  <div class="faction_div" 
+    :class="{
+      'alliance_div': alliance == true,
+      'horde_div': alliance == false }">
+    <Audio-player v-if="alliance" key="allaince" :sources="[swsong]" :loop="true" :autoplay="true"></Audio-player>
+    <Audio-player v-else  key="horde" :sources="[orgsong]" :loop="true" :autoplay="true"></Audio-player>
+    <form @submit.prevent :class="{'alliance_form': alliance == true,
+                                    'horde_form': alliance == false}">
       <label class="form_label" for="name">Enter your name:</label>
       <input class="form_input grey" type="text" name="name" v-model="name">
       <img v-if="avatar" class="avatar" :src="avatar.src" :alt="avatar.alt">
+      <p v-if="feedback" class="red-text">{{feedback}}</p>
       <div>
         <button @click="chooseAvatar" class="btn enter_button">Choose avatar</button>
         <button @click="enterChat" class="btn enter_button">Enter Chat</button>
@@ -24,6 +30,7 @@
 
 <script>
 import AudioPlayer from './Audio-player.vue'
+import swsong from '../assets/songs/stormwind.mp3'
 import orgsong from '../assets/songs/orgrimmar.mp3'
 import VueSelectImage from 'vue-select-image'
 import db from '@/firebase/init'
@@ -31,29 +38,30 @@ import db from '@/firebase/init'
 require('vue-select-image/dist/vue-select-image.css')
 
 export default {
-  name: 'Horde',
-    data () {
+  name: 'Faction',
+  data () {
     return {
-      audioSources: [
-          orgsong
-        ],
       name: null,
       images: [],
-      avatar: null
+      avatar: null,
+      feedback: null,
+      swsong,
+      orgsong
     }
   },
+  props: ['alliance'],
   components: {
     AudioPlayer,
     VueSelectImage
   },
   methods: {
     enterChat(){
-       if(this.name && this.avatar){
+      if(this.name && this.avatar){
         this.$router.push({
           name: 'Chat',
           params: { name: this.name,
-                    avatar: this.avatar, 
-                    alliance: false }
+                    avatar: this.avatar,
+                    alliance: this.alliance }
         })
       }else{
         this.feedback = 'You must have a name and an avatar!'
@@ -70,20 +78,21 @@ export default {
     }
   },
   created(){
-    db.collection('horde_leaders').get()
-    .then(snapshot => {
-      snapshot.forEach(doc => {
-        let image = {};
-        let img = doc.data();
-        image.src = img.image;
-        image.alt = img.name;
-        image.id = doc.id;
-        this.images.push(image);
+      db.collection(this.alliance ? 'alliance_leaders' : 'horde_leaders').get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          let image = {};
+          let img = doc.data();
+          image.src = img.image;
+          image.alt = img.name;
+          image.id = doc.id;
+          this.images.push(image);
+        })
       })
-    })
-    .catch(err => {
-      console.log(err);
-    })
+      .catch(err => {
+        console.log(err);
+      })
+    
   }
 }
 </script>
@@ -103,26 +112,40 @@ export default {
   background-position: center center;
   background-repeat: no-repeat;
 }
-
-.choose_button{
-  background-color: #536270;
-  margin-top: 20px;
-}
-.btn{
-  font-family: wowfont;
-}
-
-.btn:hover{
-  background-color: #800103;
-}
-
-.vue-select-image__thumbnail--selected {
-    background: #800103;
+.alliance_div{
+   background-image: url('../assets/images/alliance_background.jpg');
 }
 
 .horde_div{
   background-image: url('../assets/images/horde_background.jpg');
 }
+
+.btn{
+  font-family: wowfont;
+}
+
+.alliance_div .btn:hover{
+  background-color: #255fb0;
+}
+
+.horde_div .btn:hover{
+  background-color: #800103;
+}
+
+.alliance_div .vue-select-image__thumbnail--selected{
+  background: #255fb0;
+}
+
+.horde_div .vue-select-image__thumbnail--selected {
+    background: #800103;
+}
+
+.choose_button{
+  background-color: #536270;
+  margin-top: 20px;
+}
+
+
 
 .horde_form{
   position:absolute;
@@ -134,15 +157,26 @@ export default {
   
 }
 
+
+.alliance_form{
+  position:absolute;
+  left: 5%;
+  top: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
 .faction_div .form_label{
-  color: whitesmoke;
+  color: white;
   font-family: wowfont;
   font-size: 60px;
   
 }
 
 .faction_div .form_input{
-  color: black;
+  color: white;
   font-family: wowfont;
   width: 200px !important;
   font-size: 30px !important;
