@@ -1,12 +1,21 @@
 <p align="center">
     <img src="src/assets/images/warcraftlogo.png" width="80" height="80">
-    <h3 align="center">Trade Chat - Warcraft</h3>
-    <p>Real-time Chat Client, branded in the wacraft universe</p>
-    .
-    <p>⚒️ Vue.js, Firebase</p>
+</p>
+<h3 align="center">Trade Chat - Warcraft</h3>
+<p align="center">
+    Real-time Chat Client, branded in the wacraft universe · ⚒️ Vue.js, Firebase
     <br />
     <a href="https://wow-chat-88f4c.web.app/">View Demo</a>
 </p>
+
+## Start Adventure
+
+```
+git clone
+npm install
+npm run dev
+```
+
 
 ### Patch 1.0
 ### Savoux - Shaman Prograncement - Level 23
@@ -36,27 +45,9 @@ Reward: 5 gold, [Horde Tabard]
 **Farsight** - 10 mana - Trigger Chrome Responsive mode to inspect breakpoints
 **Composition** - 50 mana - When cast, abstracts similar functionalities from files, reducing their count and improving code reusability
 
-  
-## Inventory
-
-- Firebase Potion
-
-- Vue.js
-
-- Sass
-
 ### Blizzard Patch News:
 
 **Patch 1.1**
 A new quest is in the works! Starting with patch 3.2 Azeroth heroes will be able to speak in their native languages,
 
 as well as in Common.
-
-
-## Start Adventure
-
-```
-git clone
-npm install
-npm run dev
-```
