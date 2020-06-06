@@ -7,37 +7,32 @@
         <a @click.prevent="activate_horde"><img class="logo horde" src="../assets/images/horde-logo.png" alt="alliance-logo"></a>
       </div>
     </div>
-    <Alliance v-if="alliance"/>
-    <Horde v-if="horde"/>
+    <Faction v-else :alliance="alliance"/>
   </div>
 </template>
 
 <script>
-import Horde from './Horde'
-import Alliance from './Alliance'
+
+import Faction from './Faction'
 
 export default {
   name: 'Welcome',
   data () {
     return {
       nofaction: true,
-      horde: false,
       alliance: false
     }
   },
   components:{
-    Horde,
-    Alliance
+    Faction
   },
   methods:{
     activate_alliance(){
-      console.log("Alliance activated!");
       this.nofaction = false;
       this.alliance = true;
     },
     activate_horde(){
       this.nofaction = false;
-      this.horde = true;
     }
 
   }
