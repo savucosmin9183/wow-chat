@@ -13,6 +13,7 @@
     "@lossendae/vue-avatar": "^0.1.5",
     "firebase": "^7.15.0",
     "moment": "^2.26.0",
+    "postcss-load-config": "^2.1.0",
     "vue": "^2.5.2",
     "vue-avatar": "^2.3.0",
     "vue-chat-scroll": "^1.4.0",
