@@ -3,7 +3,7 @@
     :class="{
       'alliance_div': alliance == true,
       'horde_div': alliance == false }">
-    <Audio-player key="allaince" :sources="music" :loop="true" :autoplay="true"></Audio-player>
+    <Audio-player class="audio" key="allaince" :sources="music" :loop="true" :autoplay="true"></Audio-player>
     <form @submit.prevent :class="{'alliance_form': alliance == true,
                                     'horde_form': alliance == false}">
       <label class="form_label" for="name">Enter your name:</label>
@@ -223,6 +223,12 @@ export default {
   height: 100px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.audio{
+  position: absolute;
+  top: 0;
+  right: 5%;
 }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="chat_main_div">
-    <Audio-player :sources="audioSources" :loop="true" :autoplay="true"></Audio-player>
+    <Audio-player class="audio":sources="audioSources" :loop="true" :autoplay="true"></Audio-player>
     <div class="chat_block">
       <div class="messages" v-chat-scroll>
         <ul class="msgs">
@@ -42,7 +42,8 @@ export default {
       audioSources: [tavern],
       new_msg: null,
       messages: [],
-      whisper: true
+      whisper: true,
+      size: null
     };
   },
   methods: {
@@ -69,6 +70,11 @@ export default {
     AudioPlayer
   },
   created() {
+
+    db.collection('messages').get().then(snap => {
+    this.size = snap.size // will return the collection size
+    });
+
     this.whisper = false;
     db.collection("messages")
       .add({
@@ -87,7 +93,7 @@ export default {
         ref.onSnapshot(snapshot => {
           snapshot.docChanges().forEach(change => {
             if (change.type == "added") {
-              if(this.whisper)
+              if(this.whisper && this.messages.length > this.size)
                 new Audio(whisper).play()
               let doc = change.doc;
               this.messages.push({
