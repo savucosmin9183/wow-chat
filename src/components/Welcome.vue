@@ -110,7 +110,7 @@ html{
 }
 
 
-@media screen and (max-device-width: 800px) and (orientation: portrait){
+@media screen and (max-device-width: 800px){
   /* some CSS here */
     .welcome{
       background-image: url('../assets/images/mobile_background.png');

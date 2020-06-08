@@ -3,7 +3,6 @@
     :class="{
       'alliance_div': alliance == true,
       'horde_div': alliance == false }">
-    <Audio-player class="audio" key="allaince" :sources="music" :loop="true" :autoplay="true"></Audio-player>
     <form @submit.prevent :class="{'alliance_form': alliance == true,
                                     'horde_form': alliance == false}">
       <label class="form_label" for="name">Enter your name:</label>
@@ -28,9 +27,6 @@
 </template>
 
 <script>
-import AudioPlayer from './Audio-player.vue'
-import swsong from '../assets/songs/stormwind.mp3'
-import orgsong from '../assets/songs/orgrimmar.mp3'
 import VueSelectImage from 'vue-select-image'
 import db from '@/firebase/init'
 // add stylesheet
@@ -44,14 +40,10 @@ export default {
       images: [],
       avatar: null,
       feedback: null,
-      swsong,
-      orgsong,
-      music : null
     }
   },
   props: ['alliance'],
   components: {
-    AudioPlayer,
     VueSelectImage
   },
   methods: {
@@ -247,7 +239,7 @@ export default {
 
 
 
-@media screen and (max-device-width: 800px) and (orientation: portrait){
+@media screen and (max-device-width: 800px){
   .faction_div .form_label{
     font-size: 30px;
     

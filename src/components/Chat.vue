@@ -1,6 +1,5 @@
 <template>
   <div class="chat_main_div">
-    <Audio-player class="audio":sources="audioSources" :loop="true" :autoplay="true"></Audio-player>
     <div class="chat_block">
       <div class="messages" v-chat-scroll>
         <ul class="msgs">
@@ -28,8 +27,6 @@
 </template>
 
 <script>
-import AudioPlayer from "./Audio-player.vue";
-import tavern from "../assets/songs/tavern.mp3";
 import whisper from "../assets/songs/whisper.mp3"
 import db from "@/firebase/init";
 import moment from "moment";
@@ -39,7 +36,6 @@ export default {
   props: ["name", "avatar", "alliance"],
   data() {
     return {
-      audioSources: [tavern],
       new_msg: null,
       messages: [],
       whisper: true,
@@ -188,7 +184,7 @@ export default {
   font-size: 1.2em;
 }
 
-@media screen and (max-device-width: 800px) and (orientation: portrait){
+@media screen and (max-device-width: 800px){
 
   .chat_block {
   width: 100%;
