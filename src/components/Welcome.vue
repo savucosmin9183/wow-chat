@@ -3,8 +3,8 @@
     <div v-if="nofaction" class="welcome">
       <h2>Choose your faction</h2>
       <div class="factions">
-        <a @click.prevent="activate_alliance"><img class="alliance" src="../assets/images/alliance-logo.png" alt="alliance-logo"></a>
-        <a @click.prevent="activate_horde"><img class="horde" src="../assets/images/horde-logo.png" alt="alliance-logo"></a>
+        <a class="factions__entry alliance__entry" @click.prevent="activate_alliance"><img class="alliance" src="../assets/images/alliance-logo.png" alt="alliance-logo"></a>
+        <a class="factions__entry horde__entry" @click.prevent="activate_horde"><img class="horde" src="../assets/images/horde-logo.png" alt="alliance-logo"></a>
       </div>
     </div>
     <Faction v-else :alliance="alliance"/>
@@ -83,19 +83,15 @@ html{
 }
 
 .welcome .factions .horde{
-  width: 15vw;
   height: 25vh;
-  min-width: 170px;
-  min-height: 117px;
+  object-fit: contain;
   position: absolute;
   right: 20%;
   transition: all .2s ease-in-out;
 }
 .welcome .factions .alliance{
-  width: 10vw;
   height: 25vh;
-  min-width: 115px;
-  min-height: 117px;
+  object-fit: contain;
   position: absolute;
   left: 20%;
   transition: all .2s ease-in-out;
@@ -110,36 +106,65 @@ html{
 }
 
 
-@media screen and (max-device-width: 800px) and (orientation: portrait){
+@media screen and (max-width: 800px){
   /* some CSS here */
     .welcome{
-      background-image: url('../assets/images/mobile_background.png');
+    background-image: none;
   }
 
   .welcome h2{
-    font-size: 30px;
+    position: absolute;
+    width: 100%;
+    top: calc(50% - 33px);
+    font-size: 45px;
     color: white;
+    display: block;
+    background: rgba(0,0,0,0.5);
+    z-index: 10;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
   }
 
   .welcome .factions{
     height: 100vh;
     top: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    
+  }
+  .welcome .factions .factions__entry{
+    display: block;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-size: cover; /* or contain depending on what you want */
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  .alliance__entry{
+    background-image: url('../assets/images/stormwind.jpg');
+  }
+
+  .horde__entry{
+    background-image: url('../assets/images/orgrimmar.jpg');
   }
 
 
   .welcome .factions .horde{
-    width: 55vw;
+    position: static;
     height: 24vh;
-    margin-left: calc((55vw / 2) * -1);
-    left: 50%;
-    bottom: calc(25vh - (24vh / 2));
+    object-fit: contain;
   }
   .welcome .factions .alliance{
-    width: 40vw;
-    height: 15vh;
-    left: 50%;
-    margin-left: calc((40vw / 2) * -1);
-    top: calc(25vh - (15vh/2));
+    position: static;
+    height: 24vh;
+    object-fit: contain;
   }
 
 }

@@ -3,34 +3,30 @@
     :class="{
       'alliance_div': alliance == true,
       'horde_div': alliance == false }">
-    <Audio-player class="audio" key="allaince" :sources="music" :loop="true" :autoplay="true"></Audio-player>
     <form @submit.prevent :class="{'alliance_form': alliance == true,
                                     'horde_form': alliance == false}">
       <label class="form_label" for="name">Enter your name:</label>
-      <input class="form_input grey" type="text" name="name" v-model="name">
       <img v-if="avatar" class="avatar" :src="avatar.src" :alt="avatar.alt">
+      <input class="form_input grey" type="text" name="name" v-model="name">
       <p v-if="feedback" class="red-text">{{feedback}}</p>
       <div>
         <button @click="chooseAvatar" class="btn enter_button">Choose avatar</button>
         <button @click="enterChat" class="btn enter_button">Enter Chat</button>
       </div>
     </form>
-    <modal name="popup" height="400">
+    <modal name="popup" height="420">
         <div class="popup">
           <h1>Choose an avatar:</h1>
             <vue-select-image :dataImages="images"
                     @onselectimage="onSelectImage">
             </vue-select-image>
-          <button @click="submit_clicked" class="btn choose_button">Select</button>
+          <button @click="submit_clicked" class="btn choose_button">Close</button>
         </div>
     </modal>
   </div>
 </template>
 
 <script>
-import AudioPlayer from './Audio-player.vue'
-import swsong from '../assets/songs/stormwind.mp3'
-import orgsong from '../assets/songs/orgrimmar.mp3'
 import VueSelectImage from 'vue-select-image'
 import db from '@/firebase/init'
 // add stylesheet
@@ -44,14 +40,10 @@ export default {
       images: [],
       avatar: null,
       feedback: null,
-      swsong,
-      orgsong,
-      music : null
     }
   },
   props: ['alliance'],
   components: {
-    AudioPlayer,
     VueSelectImage
   },
   methods: {
@@ -107,6 +99,8 @@ export default {
   src: url('../assets/fonts/LifeCraft_Font.woff');
 }
 
+
+
 .faction_div{
   height: 100vh;
   width: 100vw;
@@ -125,13 +119,12 @@ export default {
 .btn{
   font-family: wowfont;
 }
-
-.alliance_div .btn:hover{
-  background-color: #255fb0;
+.enter_button{
+  margin-right: 10px;
 }
 
-.horde_div .btn:hover{
-  background-color: #800103;
+.btn:hover{
+  box-shadow: 0 0 9px 2px black;
 }
 
 .alliance_div .vue-select-image__thumbnail--selected{
@@ -142,9 +135,24 @@ export default {
     background: #800103;
 }
 
-.choose_button{
-  background-color: #536270;
+.horde_div .choose_button{
+  background-color: #800103;
   margin-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 20px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.alliance_div .choose_button{
+  background-color: #255fb0;
+  margin-top: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 20px;
+  color: black;
+  margin-bottom: 20px;
 }
 
 .faction_div .form_label{
@@ -177,12 +185,14 @@ export default {
 
 
 
-.faction_div .form_input{
+.faction_div input[type="text"].form_input{
   color: white;
   font-family: wowfont;
-  width: 200px !important;
-  font-size: 30px !important;
-  background-color: #536270 !important;
+  width: 200px;
+  font-size: 30px;
+  background-color: #536270;
+  margin-bottom: 25px;
+
   
   
 }
@@ -198,9 +208,18 @@ export default {
   text-align: center;
 }
 
+.horde_div .popup{
+  background-color: #d85757;
+}
+
+.alliance_div .popup{
+  background-color:#5767d8 ;
+}
+
 .popup h1{
-  font-size: 25px;
+  font-size: 40px;
   margin: 0;
+  font-family: wowfont;
   padding-top: 15px;
 }
 
@@ -208,6 +227,7 @@ export default {
   width: 100px;
   height: 100px;
   border-radius: 50%;
+  margin-bottom: 25px;
 }
 
 .vue-select-image__wrapper{
@@ -239,15 +259,11 @@ export default {
   cursor: pointer;
 }
 
-.audio{
-  position: absolute;
-  top: 0;
-  right: 5%;
-}
 
 
 
-@media screen and (max-device-width: 800px) and (orientation: portrait){
+
+@media screen and (max-device-width: 800px){
   .faction_div .form_label{
     font-size: 30px;
     
