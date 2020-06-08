@@ -20,7 +20,7 @@
             <vue-select-image :dataImages="images"
                     @onselectimage="onSelectImage">
             </vue-select-image>
-          <button @click="submit_clicked" class="btn choose_button">Select</button>
+          <button @click="submit_clicked" class="btn choose_button">Close</button>
         </div>
     </modal>
   </div>
@@ -231,11 +231,7 @@ export default {
   cursor: pointer;
 }
 
-.audio{
-  position: absolute;
-  top: 0;
-  right: 5%;
-}
+
 
 
 

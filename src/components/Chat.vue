@@ -62,9 +62,6 @@ export default {
       }
     }
   },
-  components: {
-    AudioPlayer
-  },
   created() {
 
     db.collection('messages').get().then(snap => {
