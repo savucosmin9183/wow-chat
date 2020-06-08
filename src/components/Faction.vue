@@ -147,7 +147,12 @@ export default {
   margin-top: 20px;
 }
 
-
+.faction_div .form_label{
+  color: white;
+  font-family: wowfont;
+  font-size: 60px;
+  
+}
 
 .horde_form{
   position:absolute;
@@ -170,12 +175,7 @@ export default {
   
 }
 
-.faction_div .form_label{
-  color: white;
-  font-family: wowfont;
-  font-size: 60px;
-  
-}
+
 
 .faction_div .form_input{
   color: white;
@@ -218,9 +218,23 @@ export default {
   justify-content: space-between;
   margin-top: 20px;
 }
+
+.vm--modal{
+  width: 35% !important;
+  min-width: 505px !important;
+}
+.vue-select-image__item{
+  width:25%;
+}
+
+.vue-select-image__thumbnail{
+    border: none;
+    width: 120px;
+    height: 120px;
+  }
 .vue-select-image__img{
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -230,5 +244,55 @@ export default {
   top: 0;
   right: 5%;
 }
+
+
+
+@media screen and (max-device-width: 800px) and (orientation: portrait){
+  .faction_div .form_label{
+    font-size: 30px;
+    
+  }
+
+  .horde_form{
+    position:absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: 35%;
+    
+  }
+
+
+  .alliance_form{
+    position:absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: 35%;
+    
+  }
+  .vm--modal{
+    position: absolute !important;
+    width: 360px !important;
+    min-width: 0 !important;
+    left: calc(50vw - 180px) !important;
+  }
+
+  .vue-select-image__thumbnail{
+    border: none;
+    width: 110px;
+    height: 110px;
+  }
+.vue-select-image__img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+}
+
+
 
 </style>

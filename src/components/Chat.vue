@@ -187,4 +187,25 @@ export default {
   display: block;
   font-size: 1.2em;
 }
+
+@media screen and (max-device-width: 800px) and (orientation: portrait){
+
+  .chat_block {
+  width: 100%;
+  height: 50%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.send_button {
+  background-color: #464541;
+  margin-left: calc(50% - 65px);
+}
+
+}
+
+
 </style>
