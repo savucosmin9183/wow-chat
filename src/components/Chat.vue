@@ -3,14 +3,14 @@
     <div class="chat_block">
       <div class="messages" v-chat-scroll>
         <ul class="msgs">
-          <li v-for="message in messages" :key="message.id">
+          <li class="message__item" v-for="message in messages" :key="message.id">
             <img class="chat_avatar" :src="message.image" />
+            <span class="timestamp"><span class="default_font">[</span>{{message.timestamp}}<span class="default_font">]</span></span>
             <span
               :class="{'name_blue': message.alliance == true,
                                         'name_red': message.alliance == false}"
-            >{{message.name}}</span>
+            ><span class="default_font green1">[</span>{{message.name}}<span class="default_font green1">]</span></span>
             <span class="message">{{message.content}}</span>
-            <span class="timestamp">{{message.timestamp}}</span>
           </li>
         </ul>
       </div>
@@ -48,8 +48,8 @@ export default {
         this.whisper = false;
         db.collection("messages")
           .add({
-            content: this.new_msg,
-            name: `${this.name}: `,
+            content: `: ${this.new_msg}`,
+            name: this.name,
             image: this.avatar.src,
             timestamp: Date.now(),
             alliance: this.alliance
@@ -71,7 +71,7 @@ export default {
     this.whisper = false;
     db.collection("messages")
       .add({
-        content: "has entered the chat",
+        content: " has entered the chat",
         name: this.name,
         image: this.avatar.src,
         timestamp: Date.now(),
@@ -86,14 +86,16 @@ export default {
         ref.onSnapshot(snapshot => {
           snapshot.docChanges().forEach(change => {
             if (change.type == "added") {
-              if(this.whisper && this.messages.length > this.size)
-                new Audio(whisper).play()
+              if(this.whisper && this.messages.length > this.size){
+                console.log(this.whisper);
+                new Audio(whisper).play();
+              }
               let doc = change.doc;
               this.messages.push({
                 id: doc.id,
                 name: doc.data().name,
                 content: doc.data().content,
-                timestamp: moment(doc.data().timestamp).format("lll"),
+                timestamp: moment(doc.data().timestamp).format("LTS"),
                 image: doc.data().image,
                 alliance: doc.data().alliance
               });
@@ -124,6 +126,18 @@ export default {
   color: red;
 }
 
+
+.default_font{
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 1em !important;
+}
+
+.default_font.green1{
+  color: #66ff00;
+  background: none;
+
+}
+
 .chat_block {
   width: 50%;
   height: 50%;
@@ -139,7 +153,12 @@ export default {
   height: 40px;
   border-radius: 50%;
 }
+.message__item{
+  display:flex;
+  align-items: center;
+  margin-bottom: 10px;
 
+}
 .messages {
   width: 100%;
   height: 100%;
@@ -178,7 +197,10 @@ export default {
 
 .msgs .timestamp {
   display: block;
-  font-size: 1.2em;
+  font-size: 1em;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: #c0c7c5;
 }
 
 @media screen and (max-device-width: 800px){

@@ -3,8 +3,8 @@
     <div v-if="nofaction" class="welcome">
       <h2>Choose your faction</h2>
       <div class="factions">
-        <a class="factions__entry" @click.prevent="activate_alliance"><img class="alliance" src="../assets/images/alliance-logo.png" alt="alliance-logo"></a>
-        <a class="factions__entry" @click.prevent="activate_horde"><img class="horde" src="../assets/images/horde-logo.png" alt="alliance-logo"></a>
+        <a class="factions__entry alliance__entry" @click.prevent="activate_alliance"><img class="alliance" src="../assets/images/alliance-logo.png" alt="alliance-logo"></a>
+        <a class="factions__entry horde__entry" @click.prevent="activate_horde"><img class="horde" src="../assets/images/horde-logo.png" alt="alliance-logo"></a>
       </div>
     </div>
     <Faction v-else :alliance="alliance"/>
@@ -106,18 +106,25 @@ html{
 }
 
 
-@media screen and (max-device-width: 800px){
+@media screen and (max-width: 800px){
   /* some CSS here */
     .welcome{
-    background-image: url('../assets/images/mobile_background.png');
+    background-image: none;
   }
 
   .welcome h2{
     position: absolute;
     width: 100%;
     top: calc(50% - 33px);
-    font-size: 30px;
+    font-size: 45px;
     color: white;
+    display: block;
+    background: rgba(0,0,0,0.5);
+    z-index: 10;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
   }
 
   .welcome .factions{
@@ -126,12 +133,26 @@ html{
     display: flex;
     align-items: center;
     flex-direction: column;
+    
   }
   .welcome .factions .factions__entry{
     display: block;
     height: 50%;
     display: flex;
+    justify-content: center;
     align-items: center;
+    width: 100%;
+    background-size: cover; /* or contain depending on what you want */
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  .alliance__entry{
+    background-image: url('../assets/images/stormwind.jpg');
+  }
+
+  .horde__entry{
+    background-image: url('../assets/images/orgrimmar.jpg');
   }
 
 
